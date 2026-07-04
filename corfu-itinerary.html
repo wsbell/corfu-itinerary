@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Corfu · Five Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C2B33; --deep:#103A44; --aqua:#2FA8C4; --aqua-2:#5FC2D4;
+    --paper:#F1EEE4; --surface:#FBFAF5; --cypress:#22443B; --coral:#E36B43;
+    --stone:#6C7A77; --line:rgba(12,43,51,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+  body{font-family:"Work Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"Space Mono",monospace}
+  a{color:inherit}
+
+  /* HERO */
+  .hero{position:relative;min-height:74vh;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 22px 34px;color:#fff;overflow:hidden}
+  .hero__img{position:absolute;inset:0;background:#0C2B33 center/cover no-repeat;background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZNbOFl6agGaGp1ND8gD-v3owj7Pa9Gi516ks3AJ0v0es9UTIpR-iGQAGpbSpRVN5s0_CndLmcRobeYPNliHUKDZ3ASeg3K0xrnusSAF9_sv2gEt43Q5u3pd9MtjZ2JTu5kms3k76q_fxR7kWw=w1600');transform:scale(1.04)}
+  .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,32,38,.30) 0%,rgba(9,32,38,.32) 42%,rgba(9,32,38,.88) 100%)}
+  .hero__inner{position:relative;max-width:1000px;margin:0 auto;width:100%}
+  .hero__eyebrow{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--aqua-2);margin-bottom:12px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(3.4rem,17vw,7.5rem);line-height:.92;letter-spacing:-.02em}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--aqua-2)}
+  .hero__sub{margin-top:14px;font-size:1.02rem;max-width:42ch;color:rgba(255,255,255,.9)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chip{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.04em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);padding:7px 11px;border-radius:100px;backdrop-filter:blur(4px)}
+  .chip b{color:var(--aqua-2);font-weight:700}
+
+  /* DAY NAV */
+  .daynav{position:sticky;top:0;z-index:40;background:rgba(241,238,228,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .daynav__track{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;max-width:1000px;margin:0 auto;scrollbar-width:none}
+  .daynav__track::-webkit-scrollbar{display:none}
+  .navpill{flex:0 0 auto;border:1px solid var(--line);background:transparent;border-radius:100px;padding:7px 14px;cursor:pointer;font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.03em;color:var(--stone);white-space:nowrap;transition:all .2s ease;min-height:38px}
+  .navpill b{color:var(--ink);font-weight:700}
+  .navpill:hover{border-color:var(--aqua)}
+  .navpill.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .navpill.active b{color:#fff}
+
+  /* INTRO */
+  .intro{max-width:1000px;margin:0 auto;padding:30px 22px 6px}
+  .intro__lead{font-family:"Fraunces",serif;font-size:clamp(1.15rem,4.6vw,1.5rem);line-height:1.35;color:var(--cypress);max-width:52ch}
+  .intro__row{display:flex;flex-wrap:wrap;gap:14px 26px;margin-top:20px;align-items:center}
+  .progress{display:flex;align-items:center;gap:12px;font-family:"Space Mono",monospace;font-size:.78rem;color:var(--stone)}
+  .progress__bar{width:120px;height:6px;border-radius:6px;background:#e2ddce;overflow:hidden;border:1px solid var(--line)}
+  .progress__fill{height:100%;width:0;background:var(--aqua);transition:width .35s ease}
+  .flag{font-size:.86rem;color:var(--coral);font-weight:500}
+
+  /* DAYS */
+  .days{max-width:1000px;margin:0 auto;padding:14px 22px 40px}
+  .day{padding-top:36px}
+  .day__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .day__no{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--aqua);letter-spacing:.1em}
+  .day__title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,6.5vw,2.6rem);line-height:1.02;letter-spacing:-.01em}
+  .day__date{font-family:"Space Mono",monospace;font-size:.78rem;color:var(--stone)}
+  .leg{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-family:"Space Mono",monospace;font-size:.72rem;color:var(--stone);background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:6px 12px}
+  .leg svg{width:14px;height:14px;flex:0 0 auto;color:var(--aqua)}
+
+  /* ROUTE */
+  .route{position:relative;margin-top:22px;padding-left:34px;list-style:none}
+  .route::before{content:"";position:absolute;left:6px;top:14px;bottom:22px;width:2px;background:linear-gradient(var(--aqua),var(--aqua-2));opacity:.4}
+  .stop{position:relative;margin-bottom:8px}
+  .stop::before{content:"";position:absolute;left:-34px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--aqua);box-shadow:0 0 0 4px var(--paper);transition:transform .2s ease}
+  .stop[data-kind="sunset"]::before{border-color:var(--coral)}
+  .stop[data-kind="fly"]::before,.stop[data-kind="base"]::before{border-color:var(--stone)}
+  .stop.is-visited::before{background:var(--aqua);border-color:var(--aqua)}
+  .stop[data-kind="sunset"].is-visited::before{background:var(--coral);border-color:var(--coral)}
+
+  /* DRIVE CONNECTOR */
+  .drive{position:relative;list-style:none;margin:4px 0 12px}
+  .drive__pill{display:inline-flex;align-items:center;gap:7px;font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.02em;color:var(--stone);background:var(--paper);padding:3px 10px 3px 4px;border-radius:100px}
+  .drive__pill svg{width:14px;height:14px;color:var(--aqua)}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px -18px rgba(12,43,51,.5)}
+  .card__media{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--deep),var(--aqua));overflow:hidden}
+  .card__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .card:hover .card__media img{transform:scale(1.05)}
+  .card__media.err img{display:none}
+  .card__media.err::after{content:"◔ photo didn’t load";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-size:.72rem;color:#fff;opacity:.85}
+  .tag{position:absolute;top:12px;left:12px;font-family:"Space Mono",monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--cypress);padding:5px 10px;border-radius:100px;z-index:2}
+  .tag[data-t="beach"]{background:var(--aqua)}
+  .tag[data-t="sunset"]{background:var(--coral)}
+  .tag[data-t="soft"]{background:var(--stone)}
+  .time{position:absolute;top:12px;right:12px;font-family:"Space Mono",monospace;font-size:.72rem;font-weight:700;color:var(--ink);background:rgba(251,250,245,.92);padding:5px 9px;border-radius:8px;z-index:2}
+  .card__body{padding:16px 18px 18px}
+  .card__body h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.28rem;line-height:1.15}
+  .card__body p{margin-top:7px;font-size:.94rem;color:#39504c}
+  .card__actions{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:7px;font-family:"Space Mono",monospace;font-size:.74rem;letter-spacing:.02em;padding:9px 13px;border-radius:10px;cursor:pointer;text-decoration:none;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:40px;transition:all .18s ease}
+  .btn svg{width:15px;height:15px}
+  .btn--map:hover{border-color:var(--aqua);color:var(--aqua)}
+  .btn--visit:hover{border-color:var(--cypress)}
+  .stop.is-visited .btn--visit{background:var(--cypress);border-color:var(--cypress);color:#fff}
+  .stop.is-visited .card__media img{filter:saturate(.55) brightness(.94)}
+
+  /* NOTES */
+  .notes{max-width:1000px;margin:0 auto;padding:8px 22px 20px}
+  .notes h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.6rem;margin-bottom:6px}
+  .notes__grid{display:grid;gap:12px;margin-top:16px}
+  @media(min-width:640px){.notes__grid{grid-template-columns:1fr 1fr}}
+  .note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--aqua);border-radius:12px;padding:14px 16px}
+  .note[data-hot]{border-left-color:var(--coral)}
+  .note h4{font-family:"Space Mono",monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stone);margin-bottom:5px}
+  .note p{font-size:.92rem}
+
+  footer{max-width:1000px;margin:0 auto;padding:26px 22px 60px;color:var(--stone);font-family:"Space Mono",monospace;font-size:.72rem;border-top:1px solid var(--line)}
+
+  @media(min-width:720px){
+    .card{display:grid;grid-template-columns:230px 1fr}
+    .card__media{aspect-ratio:auto;height:100%;min-height:176px}
+    .card__body{padding:20px 22px}
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero__img" aria-hidden="true"></div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Ionian field-log · 20–24</p>
+      <h1>Corfu<br><em>five days</em></h1>
+      <p class="hero__sub">A southeast base and a northwest wishlist — one route, cove to clifftop, fort to sunset table.</p>
+      <div class="chips">
+        <span class="chip">Base · <b>Psaras</b></span>
+        <span class="chip">Land · <b>12:00</b>, car +1h</span>
+        <span class="chip">Fly out · <b>18:55</b></span>
+        <span class="chip">Car · <b>18 stops</b></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="daynav" aria-label="Days"><div class="daynav__track" id="daynav"></div></nav>
+
+  <section class="intro">
+    <p class="intro__lead">Nearly everything worth the drive sits in the far northwest, roughly 1¼–1¾ hours from your base. So the middle days are committed day-trips — but each one clusters tightly, so you clear a corner at a time.</p>
+    <div class="intro__row">
+      <div class="progress" title="Tap “Mark visited” on any stop">
+        <span id="progressText">0 / 18 stops</span>
+        <span class="progress__bar"><span class="progress__fill" id="progressFill"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <main class="days" id="days"></main>
+
+  <section class="notes">
+    <h2>Before you go</h2>
+    <div class="notes__grid">
+      <div class="note" data-hot><h4>Book two tables</h4><p>Il Pozzo (Lakones) and Panorama (Afionas) are small, view-table places a long way to drive on spec. Reserve, and ask for a sunset window seat.</p></div>
+      <div class="note" data-hot><h4>Fort now on Wednesday</h4><p>The 21st is a Tuesday and Angelokastro shuts on Tuesdays — so the fort day has moved to Wednesday the 22nd. It still locks up at 17:30, so aim to be climbing by mid-afternoon.</p></div>
+      <div class="note"><h4>Wear real shoes</h4><p>Porto Timoni and Cape Drastis are steep, rocky, unshaded paths. Trainers and water, and save the descents for morning or late afternoon.</p></div>
+      <div class="note"><h4>It's a driving trip</h4><p>Days 2–4 are around 9 hours on the road all told. Start by 08:30, and consider merging Days 3 &amp; 4 if you'd rather bank a rest day near base.</p></div>
+    </div>
+  </section>
+
+  <footer>Built for Belliam · times and drive estimates are a suggested rhythm, not a schedule · distances in km · tap a stop's map pin for directions.</footer>
+
+<script>
+const MAP=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>`;
+const CAR=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><path d="M4 13h16v4H4z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>`;
+const CHECK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+
+const DAYS=[
+ {id:"arrival",no:"Day 1",title:"Arrival",date:"Mon 20 · south",leg:"Airport → Psaras · ~28 km",
+  stops:[
+   {id:"achilleion",name:"Achilleion Palace",tag:"Palace",kind:"culture",time:"13:20 – 14:30",drive:"20 min",
+    note:"Sisi's palace — statues, gardens and a sea-view café. Open 08:00–16:00, so go straight from the airport before check-in.",
+    map:"https://maps.google.com/?cid=17963469097814361755",
+    img:"images/achilleion.jpg"},
+   {id:"psaras",name:"Psaras",tag:"Base",kind:"base",time:"15:00 – 19:45",drive:"12 min",
+    note:"Airbnb check-in. Drop the bags, then wander down for the first swim before dinner.",
+    map:"https://maps.google.com/?cid=11916340305146507227",
+    img:"images/psaras.jpg"},
+   {id:"boukari",name:"Boukari · Spiros Karidis",tag:"Seafront dinner",kind:"sunset",time:"20:00 – 22:00",drive:"",
+    note:"Fish tavernas at the water's edge, 10 min from base. Pick the day's catch off the ice; eat with your feet nearly in the Ionian.",
+    map:"https://maps.google.com/?cid=13544327791213604292",
+    img:"images/boukari.jpg"}
+  ]},
+ {id:"afionas",no:"Day 2",title:"Afionas peninsula",date:"Tue 21 · northwest tip",leg:"~65 km · about 1h30 each way",
+  stops:[
+   {id:"portotimoni",name:"Porto Timoni",tag:"Double bay",kind:"beach",time:"09:30 – 12:30",drive:"5 min",
+    note:"Twin bays back-to-back below Afionas. A steep 20–30 min rocky descent, no shade — go early, trainers on, carry water. Swim, then climb back for lunch.",
+    img:"images/porto-timoni.jpg"},
+   {id:"afionas",name:"Afionas",tag:"Village",kind:"culture",time:"12:45 – 19:15",drive:"5 min",
+    note:"Whitewashed village strung along a ridge with sea on both sides. Long lunch, then a slow afternoon at the beach below before you head up for sunset.",
+    map:"https://maps.google.com/?cid=3660102452564996193",
+    img:"images/afionas.jpg"},
+   {id:"panorama",name:"Panorama",tag:"Sunset dinner",kind:"sunset",time:"19:30 – 21:30",drive:"",
+    note:"A headland table looking straight over Porto Timoni — one of the island's best sunsets. Book a window seat for around 20:00.",
+    map:"https://maps.google.com/?cid=12818113608184337356",
+    img:"images/panorama.jpg"}
+  ]},
+ {id:"paleo",no:"Day 3",title:"Paleokastritsa & the fort",date:"Wed 22 · northwest",leg:"~50 km · about 1h20 each way",
+  stops:[
+   {id:"lagrotta",name:"La Grotta",tag:"Cliff cove",kind:"beach",time:"10:30 – 12:00",drive:"3 min",
+    note:"A bar built into the rocks around a tiny bay. Swim and jump straight off the deck — steps down, so bring a towel and go early for a spot.",
+    map:"https://maps.google.com/?cid=409061294196738592",
+    img:"images/la-grotta.jpg"},
+   {id:"akron",name:"Akron Beach Bar",tag:"Beach club",kind:"beach",time:"12:00 – 13:30",drive:"10 min",
+    note:"Same bay, pool and loungers with a designed feel. Reserve a bed online in peak season — parking is tight without it.",
+    map:"https://maps.google.com/?cid=8203328259618099411",
+    img:"images/akron.jpg"},
+   {id:"liapades",name:"Liapades Beach",tag:"Beach",kind:"beach",time:"13:45 – 15:00",drive:"8 min",
+    note:"Pebble cove with clear water. From here you can grab a boat-taxi out to the hidden Falikafi and Bastaria coves you can't reach by road.",
+    map:"https://maps.google.com/?cid=176432511075594585",
+    img:"images/liapades.jpg"},
+   {id:"rovinia",name:"Rovinia Beach",tag:"Beach",kind:"beach",time:"15:10 – 16:00",drive:"20 min",
+    note:"Secluded white-pebble cove — spring-fed, so the coldest and clearest water on the island. Short walk down from parking.",
+    map:"https://maps.google.com/?cid=15618008327421302574",
+    img:"images/rovinia.jpg"},
+   {id:"angelokastro",name:"Angelokastro",tag:"The fort",kind:"culture",time:"16:20 – 17:20",drive:"15 min",
+    note:"Byzantine clifftop castle with views across to Albania. Steep stone stairs up, closes 17:30. It's shut Tuesdays — which is exactly why the fort day now sits on Wednesday.",
+    map:"https://www.google.com/maps/place/?q=place_id:ChIJWUz9xmpRWxMR4f_taueTDQY",
+    img:"images/angelokastro.jpg"},
+   {id:"ilpozzo",name:"Il Pozzo",tag:"Sunset dinner",kind:"sunset",time:"19:00 – 21:00",drive:"",
+    note:"Clifftop Italian in Lakones — standout carpaccio and pasta. Opens 15:00; book a view table before you drive up.",
+    map:"https://maps.google.com/?cid=14390866155669076609",
+    img:"images/il-pozzo.jpg"}
+  ]},
+ {id:"north",no:"Day 4",title:"Peroulades & Sidari",date:"Thu 23 · far north",leg:"~70 km · about 1h40 each way",
+  stops:[
+   {id:"canal",name:"Canal d'Amour",tag:"Swim & rock",kind:"beach",time:"11:00 – 13:30",drive:"10 min",
+    note:"Sandstone channels and little sea caves carved into the Sidari coast. A swim, photos, then lunch in the village nearby.",
+    map:"https://maps.google.com/?cid=14445496272545371942",
+    img:"images/canal-damour.jpg"},
+   {id:"drastis",name:"Cape Drastis",tag:"Cliffs",kind:"culture",time:"16:30 – 18:30",drive:"3 min",
+    note:"Eroded white cliffs and sea stacks at the island's northwest corner. Rough footpath out to the viewpoint — worth it for the drama.",
+    map:"https://maps.google.com/?cid=3692880764660255913",
+    img:"images/cape-drastis.jpg"},
+   {id:"loggas",name:"Loggas Beach",tag:"Sunset",kind:"sunset",time:"18:45 – 21:00",drive:"",
+    note:"A clifftop sunset bar at Peroulades, two minutes from Cape Drastis. The last light of the trip, straight down the cliffs into the sea.",
+    map:"https://maps.google.com/?cid=2906717984510712442",
+    img:"images/loggas.jpg"}
+  ]},
+ {id:"home",no:"Day 5",title:"Corfu Town & home",date:"Fri 24 · east",leg:"Checkout 11:00 · Benitses → town → airport",
+  stops:[
+   {id:"faliraki",name:"Faliraki Beach Bar",tag:"Swim & lunch",kind:"beach",time:"11:45 – 13:45",drive:"25 min",
+    note:"A tiny, spotless bathing cove at Benitses run by a lovely older couple — sunbeds around 5€, fresh food made to order. It sits right on the road up to town, so swim and eat here before the Old Town.",
+    map:"https://maps.google.com/?cid=11567433403808972787",
+    img:"images/faliraki.jpg"},
+   {id:"oldtown",name:"Old Town of Corfu",tag:"Town",kind:"culture",time:"14:00 – 15:30",drive:"10 min",
+    note:"The Old Fortress, the arcaded Liston, Saint Spyridon and a last long lunch. Venetian lanes five minutes from the airport, so no rush.",
+    map:"https://maps.google.com/?cid=9330735507425672539",
+    img:"images/old-town.jpg"},
+   {id:"airport",name:"Corfu Airport · CFU",tag:"Fly home",kind:"fly",time:"16:55 – 18:55",drive:"",
+    note:"Drop the car by ~15:45, be airside by 16:55 for the 18:55 flight. Grab a window seat — the runway sits right on the water.",
+    map:"https://maps.google.com/?cid=3707393816662574799",
+    img:"images/airport.jpg"}
+  ]}
+];
+
+const tagType=k=>k==="beach"?"beach":(k==="sunset"?"sunset":(k==="base"||k==="fly")?"soft":"culture");
+const imgSrc=u=>u.replace(/=s\d+-w\d+-h\d+$/,"=w800");
+const allIds=DAYS.flatMap(d=>d.stops.map(s=>s.id));
+const TOTAL=allIds.length;
+let visited=new Set();
+
+const nav=document.getElementById("daynav");
+nav.innerHTML=DAYS.map((d,i)=>`<button class="navpill${i===0?' active':''}" data-target="${d.id}"><b>${d.no}</b> · ${d.title}</button>`).join("");
+
+document.getElementById("days").innerHTML=DAYS.map(d=>`
+  <section class="day" id="${d.id}">
+    <div class="day__head">
+      <span class="day__no">${d.no}</span>
+      <h2 class="day__title">${d.title}</h2>
+      <span class="day__date">${d.date}</span>
+    </div>
+    <span class="leg">${CAR}${d.leg}</span>
+    <ol class="route">
+      ${d.stops.map(s=>`
+        <li class="stop" id="stop-${s.id}" data-kind="${s.kind}">
+          <div class="card">
+            <div class="card__media">
+              <img referrerpolicy="no-referrer" loading="lazy" src="${imgSrc(s.img)}" alt="${s.name}" onerror="this.closest('.card__media').classList.add('err')">
+              <span class="tag" data-t="${tagType(s.kind)}">${s.tag}</span>
+              <span class="time">${s.time}</span>
+            </div>
+            <div class="card__body">
+              <h3>${s.name}</h3>
+              <p>${s.note}</p>
+              <div class="card__actions">
+                <a class="btn btn--map" href="${s.map}" target="_blank" rel="noopener">${MAP}Map</a>
+                <button class="btn btn--visit" data-id="${s.id}" aria-pressed="false">${CHECK}<span class="lbl">Mark visited</span></button>
+              </div>
+            </div>
+          </div>
+        </li>
+        ${s.drive?`<li class="drive"><span class="drive__pill">${CAR}≈ ${s.drive} to next stop</span></li>`:""}`).join("")}
+    </ol>
+  </section>`).join("");
+
+function renderProgress(){
+  const n=visited.size;
+  document.getElementById("progressText").textContent=`${n} / ${TOTAL} stops`;
+  document.getElementById("progressFill").style.width=(n/TOTAL*100)+"%";
+}
+function applyVisited(){
+  document.querySelectorAll(".btn--visit").forEach(b=>{
+    const on=visited.has(b.dataset.id);
+    const stop=document.getElementById("stop-"+b.dataset.id);
+    stop.classList.toggle("is-visited",on);
+    b.setAttribute("aria-pressed",on);
+    b.querySelector(".lbl").textContent=on?"Visited":"Mark visited";
+  });
+  renderProgress();
+}
+async function loadVisited(){
+  try{ if(window.storage){ const r=await window.storage.get("corfu:visited"); if(r&&r.value) visited=new Set(JSON.parse(r.value)); } }catch(e){}
+  applyVisited();
+}
+async function saveVisited(){
+  try{ if(window.storage) await window.storage.set("corfu:visited",JSON.stringify([...visited])); }catch(e){}
+}
+document.getElementById("days").addEventListener("click",e=>{
+  const b=e.target.closest(".btn--visit"); if(!b)return;
+  const id=b.dataset.id; visited.has(id)?visited.delete(id):visited.add(id);
+  applyVisited(); saveVisited();
+});
+nav.addEventListener("click",e=>{
+  const p=e.target.closest(".navpill"); if(!p)return;
+  const el=document.getElementById(p.dataset.target); el&&el.scrollIntoView({behavior:"smooth",block:"start"});
+});
+const pills=[...document.querySelectorAll(".navpill")];
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      pills.forEach(p=>p.classList.toggle("active",p.dataset.target===en.target.id));
+      const active=nav.querySelector(".active"); active&&active.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});
+    }
+  });
+},{rootMargin:"-45% 0px -50% 0px"});
+DAYS.forEach(d=>io.observe(document.getElementById(d.id)));
+loadVisited();
+</script>
+</body>
+</html>
