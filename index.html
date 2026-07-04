@@ -129,10 +129,10 @@
       <h1>Corfu<br><em>five days</em></h1>
       <p class="hero__sub">A southeast base and a northwest wishlist — one route, cove to clifftop, fort to sunset table.</p>
       <div class="chips">
-        <span class="chip">Base · <b>Psaras</b></span>
+        <span class="chip">Base · <b>Airbnb (Psaras)</b></span>
         <span class="chip">Land · <b>12:00</b>, car +1h</span>
         <span class="chip">Fly out · <b>18:55</b></span>
-        <span class="chip">Car · <b>18 stops</b></span>
+        <span class="chip">Car · <b>22 stops</b></span>
       </div>
     </div>
   </header>
@@ -143,7 +143,7 @@
     <p class="intro__lead">Nearly everything worth the drive sits in the far northwest, roughly 1¼–1¾ hours from your base. So the middle days are committed day-trips — but each one clusters tightly, so you clear a corner at a time.</p>
     <div class="intro__row">
       <div class="progress" title="Tap “Mark visited” on any stop">
-        <span id="progressText">0 / 18 stops</span>
+        <span id="progressText">0 / 22 stops</span>
         <span class="progress__bar"><span class="progress__fill" id="progressFill"></span></span>
       </div>
     </div>
@@ -169,34 +169,42 @@ const CAR=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wid
 const CHECK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
 
 const DAYS=[
- {id:"arrival",no:"Day 1",title:"Arrival",date:"Mon 20 · south",leg:"Airport → Psaras · ~28 km",
+ {id:"arrival",no:"Day 1",title:"Arrival",date:"Mon 20 · south",leg:"Airport → Airbnb (Psaras) · ~28 km",
   stops:[
    {id:"achilleion",name:"Achilleion Palace",tag:"Palace",kind:"culture",time:"13:20 – 14:30",drive:"20 min",
     note:"Sisi's palace — statues, gardens and a sea-view café. Open 08:00–16:00, so go straight from the airport before check-in.",
     map:"https://maps.google.com/?cid=17963469097814361755",
     img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPXDb2ZA1YzazZTVVaDnVGZpIZyDhcOr8TzrHJTBLKBO6KXA9GC7UKmGeH5a-072Q5JdBg-w8R3FILWL1w9De9OfOeOjUG2bswR_eDZG4xyZpurN4ZjSOv-xartBdTVNYE1lQwpa-s2menS=w800"},
-   {id:"psaras",name:"Psaras",tag:"Base",kind:"base",time:"15:00 – 19:45",drive:"12 min",
-    note:"Airbnb check-in. Drop the bags, then wander down for the first swim before dinner.",
-    map:"https://maps.google.com/?cid=11916340305146507227",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZOQeuwIZIkR7jb9i_FxMQcqMtZWnDKSCi1eYX2C8fTT4aG9ZhxuSunKOvXuT7T8Pywvzw901jFOz3VILG1mno3IXOCzR5bv2-9DS5eBS3QpuDQJ4aDF0rObNo0rUbIc08I7LosGsPhjQdD9tZk=w800"},
-   {id:"boukari",name:"Boukari · Spiros Karidis",tag:"Seafront dinner",kind:"sunset",time:"20:00 – 22:00",drive:"",
+   {id:"psaras",name:"Airbnb (Psaras)",tag:"Base",kind:"base",time:"15:00 – 19:45",drive:"12 min",
+    note:"Check-in. Drop the bags, then wander down for the first swim before dinner.",
+    map:"https://maps.app.goo.gl/utJdd59DFeT99xQy7?g_st=ic",
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1196179071859127300/original/e2067335-d3d1-4417-929f-a860831c74c9.jpeg?im_w=720"},
+   {id:"boukari",name:"Boukari · Spiros Karidis",tag:"Seafront dinner",kind:"sunset",time:"20:00 – 22:00",drive:"10 min",
     note:"Fish tavernas at the water's edge, 10 min from base. Pick the day's catch off the ice; eat with your feet nearly in the Ionian.",
     map:"https://maps.google.com/?cid=13544327791213604292",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZO2QORgsI-p5RZupef5IskDJuemfWIrFpT1GQxVYq9WF4cBuLD03JCl-h1DhaB9BEVUxcvjjtdSBc4JKD8bgny1YZpCH5s9nJSEyHrrxad_yIFO8Epx5uHDFa7Wn5Cm3w4_XsR7c9UrKUWO=w800"}
+    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZO2QORgsI-p5RZupef5IskDJuemfWIrFpT1GQxVYq9WF4cBuLD03JCl-h1DhaB9BEVUxcvjjtdSBc4JKD8bgny1YZpCH5s9nJSEyHrrxad_yIFO8Epx5uHDFa7Wn5Cm3w4_XsR7c9UrKUWO=w800"},
+   {id:"return1",name:"Airbnb (Psaras)",tag:"Return for the night",kind:"base",time:"22:10",drive:"",
+    note:"Back to base — about 10 minutes from Boukari, arriving around 22:10.",
+    map:"https://maps.app.goo.gl/utJdd59DFeT99xQy7?g_st=ic",
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1196179071859127300/original/e2067335-d3d1-4417-929f-a860831c74c9.jpeg?im_w=720"}
   ]},
  {id:"afionas",no:"Day 2",title:"Afionas peninsula",date:"Tue 21 · northwest tip",leg:"~65 km · about 1h30 each way",
   stops:[
    {id:"portotimoni",name:"Porto Timoni",tag:"Double bay",kind:"beach",time:"09:30 – 12:30",drive:"5 min",
     note:"Twin bays back-to-back below Afionas. A steep 20–30 min rocky descent, no shade — go early, trainers on, carry water. Swim, then climb back for lunch.",
     img:"https://lh3.googleusercontent.com/place-photos/AJRVUZNbOFl6agGaGp1ND8gD-v3owj7Pa9Gi516ks3AJ0v0es9UTIpR-iGQAGpbSpRVN5s0_CndLmcRobeYPNliHUKDZ3ASeg3K0xrnusSAF9_sv2gEt43Q5u3pd9MtjZ2JTu5kms3k76q_fxR7kWw=w800"},
-   {id:"afionas",name:"Afionas",tag:"Village",kind:"culture",time:"12:45 – 19:15",drive:"5 min",
+   {id:"afionas",name:"Afionas Village",tag:"Village",kind:"culture",time:"12:45 – 19:15",drive:"5 min",
     note:"Whitewashed village strung along a ridge with sea on both sides. Long lunch, then a slow afternoon at the beach below before you head up for sunset.",
     map:"https://maps.google.com/?cid=3660102452564996193",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPdt4TlT8DJO6vZE8SfnVEpp2GWEr35VTEFteFtJMQFvbTTf5if8dYEfg5dqp5pWqFIhRjq9HRX6BolZKVzs_Orzw1xc7T_ARdZ6_lWS41UsoJ5R-h2L6LGTd8C24gD8e5f4SS_iZCe0HnCCA=w800"},
-   {id:"panorama",name:"Panorama",tag:"Sunset dinner",kind:"sunset",time:"19:30 – 21:30",drive:"",
+    img:"https://panoramacorfu.com/wp-content/uploads/2022/11/afionas-village-corfu-1.webp"},
+   {id:"panorama",name:"Panorama Taverna",tag:"Sunset dinner",kind:"sunset",time:"19:30 – 21:30",drive:"1h30",
     note:"A headland table looking straight over Porto Timoni — one of the island's best sunsets. Book a window seat for around 20:00.",
     map:"https://maps.google.com/?cid=12818113608184337356",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZOhlqMtkuhMoZBgKfge1LLMiWNzhkd8uvhyReLsfAq83CrkdkDry_JIXCjCpShDupFteZGcTrukX6Y9lHBzRHxF0j87IifeZK19xSKtnCnjZOVKCtk58x81peV6lnU4UByUC6T0qJRjIIQgYOerHw2Kvg=w800"}
+    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZOhlqMtkuhMoZBgKfge1LLMiWNzhkd8uvhyReLsfAq83CrkdkDry_JIXCjCpShDupFteZGcTrukX6Y9lHBzRHxF0j87IifeZK19xSKtnCnjZOVKCtk58x81peV6lnU4UByUC6T0qJRjIIQgYOerHw2Kvg=w800"},
+   {id:"return2",name:"Airbnb (Psaras)",tag:"Return for the night",kind:"base",time:"23:00",drive:"",
+    note:"Back to base — about 1h30 from Afionas, arriving around 23:00.",
+    map:"https://maps.app.goo.gl/utJdd59DFeT99xQy7?g_st=ic",
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1196179071859127300/original/e2067335-d3d1-4417-929f-a860831c74c9.jpeg?im_w=720"}
   ]},
  {id:"paleo",no:"Day 3",title:"Paleokastritsa & the fort",date:"Wed 22 · northwest",leg:"~50 km · about 1h20 each way",
   stops:[
@@ -207,7 +215,7 @@ const DAYS=[
    {id:"akron",name:"Akron Beach Bar",tag:"Beach club",kind:"beach",time:"12:00 – 13:30",drive:"10 min",
     note:"Same bay, pool and loungers with a designed feel. Reserve a bed online in peak season — parking is tight without it.",
     map:"https://maps.google.com/?cid=8203328259618099411",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZOkktEB5I44q5Igz6hL2Je8MT8e967nAmeifBiysK7EUO64s6JV16V81DMxqVraDX81my87yxU0sUOVTQrPTGpuS1QOGthv0bbhZM3JJF_KQrFEEFnfnzh2Zb3ZvSMuqECiP3sHNDO9dlUvIkI=w800"},
+    img:"https://akron.gr/web-assets/uploads/2022/04/DSC09417-HDR.jpg"},
    {id:"liapades",name:"Liapades Beach",tag:"Beach",kind:"beach",time:"13:45 – 15:00",drive:"8 min",
     note:"Pebble cove with clear water. From here you can grab a boat-taxi out to the hidden Falikafi and Bastaria coves you can't reach by road.",
     map:"https://maps.google.com/?cid=176432511075594585",
@@ -220,10 +228,14 @@ const DAYS=[
     note:"Byzantine clifftop castle with views across to Albania. Steep stone stairs up, closes 17:30. It's shut Tuesdays — which is exactly why the fort day now sits on Wednesday.",
     map:"https://www.google.com/maps/place/?q=place_id:ChIJWUz9xmpRWxMR4f_taueTDQY",
     img:"https://lh3.googleusercontent.com/place-photos/AJRVUZO-0ED3eH4lo1E-fkpoP36KtT63iYimPqoIaz-YcqZM__bSNM6BZIF5IeK5cXKe10wNKDhnYUgOFWif3hpQtQ-QuWFgwqiZuFcHEWlA30Mb6XxUEiSzHPhuk7dT-G_ipcrarfDwJO6VTuS9jA=w800"},
-   {id:"ilpozzo",name:"Il Pozzo",tag:"Sunset dinner",kind:"sunset",time:"19:00 – 21:00",drive:"",
+   {id:"ilpozzo",name:"Il Pozzo",tag:"Sunset dinner",kind:"sunset",time:"19:00 – 21:00",drive:"1h20",
     note:"Clifftop Italian in Lakones — standout carpaccio and pasta. Opens 15:00; book a view table before you drive up.",
     map:"https://maps.google.com/?cid=14390866155669076609",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPmtCpnGcgfKI0gMHC4vz87teG-f45npxp0CCcmqYew2Kj9de_ubgEL6ugDwJbILoQjiPNVUz3eBGiVUF0zkSmQ1L5lym_Ibvm09rpaKRBSlqFy_IdC8c-McX53LPsNspBHBDRbMhsTqtf3mQ=w734"}
+    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPmtCpnGcgfKI0gMHC4vz87teG-f45npxp0CCcmqYew2Kj9de_ubgEL6ugDwJbILoQjiPNVUz3eBGiVUF0zkSmQ1L5lym_Ibvm09rpaKRBSlqFy_IdC8c-McX53LPsNspBHBDRbMhsTqtf3mQ=w734"},
+   {id:"return3",name:"Airbnb (Psaras)",tag:"Return for the night",kind:"base",time:"22:20",drive:"",
+    note:"Back to base — about 1h20 from Lakones, arriving around 22:20.",
+    map:"https://maps.app.goo.gl/utJdd59DFeT99xQy7?g_st=ic",
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1196179071859127300/original/e2067335-d3d1-4417-929f-a860831c74c9.jpeg?im_w=720"}
   ]},
  {id:"north",no:"Day 4",title:"Peroulades & Sidari",date:"Thu 23 · far north",leg:"~70 km · about 1h40 each way",
   stops:[
@@ -235,21 +247,25 @@ const DAYS=[
     note:"Eroded white cliffs and sea stacks at the island's northwest corner. Rough footpath out to the viewpoint — worth it for the drama.",
     map:"https://maps.google.com/?cid=3692880764660255913",
     img:"https://lh3.googleusercontent.com/place-photos/AJRVUZNOR4aoAuA3rrxocbI-JcmOEtJgvEcGYq6gzZBH0q7UJbJ2LdOkbvOg-ZUfZQ6BwEKdqSVP2SBEeiPEG9G67wRMIUVRl54VzOIWsbUs6U3iTJSUp-LTm9amB9WIDBUEQZcVZ8MrSp8DBEURwGc=w800"},
-   {id:"loggas",name:"Loggas Beach",tag:"Sunset",kind:"sunset",time:"18:45 – 21:00",drive:"",
+   {id:"loggas",name:"Loggas Beach",tag:"Sunset",kind:"sunset",time:"18:45 – 21:00",drive:"1h40",
     note:"A clifftop sunset bar at Peroulades, two minutes from Cape Drastis. The last light of the trip, straight down the cliffs into the sea.",
     map:"https://maps.google.com/?cid=2906717984510712442",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPxviPhGmGracQjj0tZ0XN2HZEzJeEQ57NSAEavJFw9NzdJJXZqHOMnx5luGFIdwAUGFb3O2piaK5qwhHcI5x0cNK3UpSAP8EjeCNNLNYHQVora5IgLeqWpge3Ue8L-oXmEHTl1GTpxhXdE190=w800"}
+    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPxviPhGmGracQjj0tZ0XN2HZEzJeEQ57NSAEavJFw9NzdJJXZqHOMnx5luGFIdwAUGFb3O2piaK5qwhHcI5x0cNK3UpSAP8EjeCNNLNYHQVora5IgLeqWpge3Ue8L-oXmEHTl1GTpxhXdE190=w800"},
+   {id:"return4",name:"Airbnb (Psaras)",tag:"Return for the night",kind:"base",time:"22:40",drive:"",
+    note:"Back to base — about 1h40 from Peroulades, arriving around 22:40. Longest of the trip.",
+    map:"https://maps.app.goo.gl/utJdd59DFeT99xQy7?g_st=ic",
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1196179071859127300/original/e2067335-d3d1-4417-929f-a860831c74c9.jpeg?im_w=720"}
   ]},
  {id:"home",no:"Day 5",title:"Corfu Town & home",date:"Fri 24 · east",leg:"Checkout 11:00 · Benitses → town → airport",
   stops:[
    {id:"faliraki",name:"Faliraki Beach Bar",tag:"Swim & lunch",kind:"beach",time:"11:45 – 13:45",drive:"25 min",
     note:"A tiny, spotless bathing cove at Benitses run by a lovely older couple — sunbeds around 5€, fresh food made to order. It sits right on the road up to town, so swim and eat here before the Old Town.",
     map:"https://maps.google.com/?cid=11567433403808972787",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZPGN1RrQ-X8U4hisWokfhWNMpKbVbwemz_dHiTl1TZtdLbwiXDf8orpenPOUU11_tCq6qiBKGibSgEJpYt4t5oQ32RYC4pVP5jkKbw8bwwZcCdMsGeZExUaGsGXj9BNjeCm6z3Z04GeMMw3EeuMyAbu=w800"},
+    img:"https://www.allovergreece.com/uploads/beaches/62/Faliraki.jpg"},
    {id:"oldtown",name:"Old Town of Corfu",tag:"Town",kind:"culture",time:"14:00 – 15:30",drive:"10 min",
     note:"The Old Fortress, the arcaded Liston, Saint Spyridon and a last long lunch. Venetian lanes five minutes from the airport, so no rush.",
     map:"https://maps.google.com/?cid=9330735507425672539",
-    img:"https://lh3.googleusercontent.com/place-photos/AJRVUZMj9glIWBD3PBQnUdHEk4ddRp2uFbY1El3TkDrK0IZGBH-tO1M7TI7uAncg5l0jzGszleT8S1jT-3hAi-Px48Y6q3zpZIDdHY51qVCovDI6JNIuOJ65GzY3jPO_kcTb1iubp135XwLsfyWU=w800"},
+    img:"https://pohcdn.com/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/corfu-1.jpg"},
    {id:"airport",name:"Corfu Airport · CFU",tag:"Fly home",kind:"fly",time:"16:55 – 18:55",drive:"",
     note:"Drop the car by ~15:45, be airside by 16:55 for the 18:55 flight. Grab a window seat — the runway sits right on the water.",
     map:"https://maps.google.com/?cid=3707393816662574799",
